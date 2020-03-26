@@ -22,16 +22,16 @@ steps:
     script: |
       $Base = "http://www.adressa.no/"
       $Url = $Base + "digital/" 
-      Write-Host $Url
       $expected = 'test'
       $MaxRetryCount = 5
       $RetryDelay = 5
       
       for ($i = 0; $i -lt $MaxRetryCount; $i++)
       {
+          Write-Host $Url
           Start-Sleep -s $RetryDelay
           #$result = Invoke-RestMethod -Method Get -Uri $Url
-          $result = 'tset'
+          $result = 'test'
           if ($result -eq $expected){
               $MaxRetryCount = 0
               }
