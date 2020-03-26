@@ -20,9 +20,25 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      # Write your PowerShell commands here.
+      $Base = "http://www.adressa.no/"
+      $Url = $Base + "digital/" 
+      Write-Host $Url
+      $expected = 'test'
+      $MaxRetryCount = 5
+      $RetryDelay = 5
       
-      Write-Host "Hello World"
+      for ($i = 0; $i -lt $MaxRetryCount; $i++)
+      {
+          Start-Sleep -s $RetryDelay
+          #$result = Invoke-RestMethod -Method Get -Uri $Url
+          $result = 'tset'
+          if ($result -eq $expected){
+              $MaxRetryCount = 0
+              }
+      }
+      if ($result -ne $expected){
+          Throw
+          }
 
 - task: NuGetToolInstaller@1
 
